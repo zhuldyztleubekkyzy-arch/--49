@@ -1,0 +1,476 @@
+{
+  "summary": {
+    "title": "Dorama Alem — Authentication",
+    "owner": "Dorama Alem project",
+    "description": "STRIDE threat model for authentication and role-based access control."
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "Authentication DFD",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "diagramType": "STRIDE",
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 75
+              },
+              "position": {
+                "x": 30,
+                "y": 210
+              },
+              "angle": 0,
+              "id": "ccf35981-b019-4822-be6e-3b9985319704",
+              "z": 1,
+              "threats": [
+                {
+                  "title": "Account impersonation",
+                  "type": "Spoofing",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Attacker attempts to sign in as another user; account and personal data may be compromised.",
+                  "mitigation": "Secure password hashing, session protection and login attempt limits.",
+                  "threatId": "c32508c1-f1f1-4580-8937-f7d6e26ceb42"
+                }
+              ],
+              "hasOpenThreats": true,
+              "outOfScope": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "User"
+                },
+                ".element-text": {
+                  "class": "element-text isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 160,
+                "height": 75
+              },
+              "position": {
+                "x": 275,
+                "y": 210
+              },
+              "angle": 0,
+              "id": "4fa57c33-9681-4fe3-b068-d9272770d7fa",
+              "z": 2,
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Frontend"
+                },
+                ".element-text": {
+                  "class": "element-text isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 160,
+                "height": 75
+              },
+              "position": {
+                "x": 530,
+                "y": 210
+              },
+              "angle": 0,
+              "id": "44890c5d-d449-4f7c-bba3-9671461a7e0f",
+              "z": 3,
+              "threats": [
+                {
+                  "title": "Unauthorized content modification",
+                  "type": "Tampering",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Unauthorized API request changes drama content or ratings, damaging integrity.",
+                  "mitigation": "Server-side validation, role checks and audit changes.",
+                  "threatId": "e37938bf-ff8e-483c-847d-576a556b026f"
+                },
+                {
+                  "title": "Untraceable admin actions",
+                  "type": "Repudiation",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Admin changes lack recorded author and timestamp, making investigation difficult.",
+                  "mitigation": "Audit logs recording actor, action and time without secrets.",
+                  "threatId": "f5312c79-d028-4053-8f2d-685af2965760"
+                },
+                {
+                  "title": "Excessive requests",
+                  "type": "Denial of service",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Repeated requests exhaust server resources and make the service unavailable.",
+                  "mitigation": "Rate limiting, request size limits and resource optimization.",
+                  "threatId": "c331de1f-b03e-4306-af80-051b732e43da"
+                },
+                {
+                  "title": "Privilege escalation",
+                  "type": "Elevation of privilege",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "Normal user accesses admin functions and modifies protected content.",
+                  "mitigation": "Enforce server-side authorization on every request and deny by default.",
+                  "threatId": "3b5daf29-793d-43e0-b664-c6c5b8d8d90c"
+                }
+              ],
+              "hasOpenThreats": true,
+              "outOfScope": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Authentication API"
+                },
+                ".element-text": {
+                  "class": "element-text isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 75
+              },
+              "position": {
+                "x": 780,
+                "y": 210
+              },
+              "angle": 0,
+              "id": "21767267-58fb-4e64-81cf-3acb04209624",
+              "z": 4,
+              "threats": [
+                {
+                  "title": "Personal data exposure",
+                  "type": "Information disclosure",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "High",
+                  "description": "API or database access exposes another user email or private records.",
+                  "mitigation": "Least-data responses, ownership checks, HTTPS and protected logs.",
+                  "threatId": "1d234a38-8462-49eb-94b5-c2cf6a3fea59"
+                }
+              ],
+              "hasOpenThreats": true,
+              "outOfScope": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Database"
+                },
+                ".element-text": {
+                  "class": "element-text isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "ccf35981-b019-4822-be6e-3b9985319704"
+              },
+              "target": {
+                "id": "4fa57c33-9681-4fe3-b068-d9272770d7fa"
+              },
+              "id": "5580f91f-b47b-40f9-96ff-2eec4c305f6a",
+              "z": 5,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Login input",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "4fa57c33-9681-4fe3-b068-d9272770d7fa"
+              },
+              "target": {
+                "id": "44890c5d-d449-4f7c-bba3-9671461a7e0f"
+              },
+              "id": "00812c28-dc6c-4342-adc8-95adf2535ea9",
+              "z": 6,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "HTTPS login request",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "44890c5d-d449-4f7c-bba3-9671461a7e0f"
+              },
+              "target": {
+                "id": "21767267-58fb-4e64-81cf-3acb04209624"
+              },
+              "id": "5803cba7-166c-41f9-a608-9ff72994b9df",
+              "z": 7,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Credentials / roles query",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "21767267-58fb-4e64-81cf-3acb04209624"
+              },
+              "target": {
+                "id": "44890c5d-d449-4f7c-bba3-9671461a7e0f"
+              },
+              "id": "f2fb4a1a-545c-42c6-a5b1-0a674990ec6f",
+              "z": 8,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "User / role data",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "44890c5d-d449-4f7c-bba3-9671461a7e0f"
+              },
+              "target": {
+                "id": "4fa57c33-9681-4fe3-b068-d9272770d7fa"
+              },
+              "id": "c28cd194-2df8-4b6b-b750-7f352f71ece3",
+              "z": 9,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Session response",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "4fa57c33-9681-4fe3-b068-d9272770d7fa"
+              },
+              "target": {
+                "id": "ccf35981-b019-4822-be6e-3b9985319704"
+              },
+              "id": "69176f13-a49a-4e97-b321-461b96ef896f",
+              "z": 10,
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Login result",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "threats": [],
+              "hasOpenThreats": false,
+              "outOfScope": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 490,
+                "y": 100
+              },
+              "target": {
+                "x": 490,
+                "y": 410
+              },
+              "id": "14180c25-c4fd-428c-9f56-8c1080dbc9c5",
+              "z": 11,
+              "isTrustBoundary": true,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Boundary",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 755,
+                "y": 100
+              },
+              "target": {
+                "x": 755,
+                "y": 410
+              },
+              "id": "763a3de3-2350-4b1f-9fc8-e0f83e2eaff3",
+              "z": 12,
+              "isTrustBoundary": true,
+              "attrs": {}
+            }
+          ]
+        },
+        "size": {
+          "height": 520,
+          "width": 1020
+        }
+      }
+    ],
+    "reviewer": ""
+  }
+}
